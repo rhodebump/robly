@@ -125,19 +125,20 @@ public class RoblyClient {
 	public RoblyResponse addSubList(String memberId, String email,
 			String subListId) {
 
-	     ClientConfig clientConfig = new DefaultClientConfig();
-	        clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
-	        Client client = Client.create(clientConfig);
-	        
+		ClientConfig clientConfig = new DefaultClientConfig();
+		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING,
+				Boolean.TRUE);
+		Client client = Client.create(clientConfig);
+
 		MultivaluedMap formData = new MultivaluedHashMap();
 		formData.add("name1", "val1");
 		formData.add("name2", "val2");
-		  WebResource webResourcePost = client.resource(postURL);
-		 //WebResource webResourceGet = client.resource(getBookURL).queryParam("id", "1");
-	        ClientResponse response = webResourceGet.get(ClientResponse.class);
-	        BookEntity responseEntity = response.getEntity(BookEntity.class);
-	        
-	        
+		WebResource webResourcePost = client.resource(postURL);
+		// WebResource webResourceGet =
+		// client.resource(getBookURL).queryParam("id", "1");
+		ClientResponse response = webResourceGet.get(ClientResponse.class);
+		BookEntity responseEntity = response.getEntity(BookEntity.class);
+
 		ClientResponse response = webResource.type(
 				"application/x-www-form-urlencoded").post(ClientResponse.class,
 				formData);
