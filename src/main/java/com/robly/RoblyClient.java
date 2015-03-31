@@ -27,6 +27,16 @@ public class RoblyClient {
 		this.apiKey = apiKey;
 		this.apiId = apiId;
 	}
+    
+    
+    
+    private Client getClient() {
+    
+    		Client client = ClientBuilder.newClient();
+
+		// client.register(new LoggingFilter());
+        return client;
+    }
 
 	/*
 	 * View Contacts
@@ -47,9 +57,7 @@ public class RoblyClient {
 
 	public List<Contact> contactsShow(boolean subscribed, boolean deleted,
 			boolean includeSubLists, int limit, int offset) {
-		Client client = ClientBuilder.newClient();
-
-		// client.register(new LoggingFilter());
+		Client client = getClient();
 
 		WebTarget target = client.target(restURL).path("/api/v1/contacts/show");
 		target = target.queryParam("api_key", apiKey);
@@ -103,8 +111,7 @@ public class RoblyClient {
 	public Contact contactsSearch(String memberId, String email,
 			boolean includeFields, boolean includeSubLists) {
 
-		Client client = ClientBuilder.newClient();
-		client.register(new LoggingFilter());
+		Client client = getClient();
 		WebTarget target = client.target(restURL).path(
 				"/api/v1/contacts/search");
 		target = target.queryParam("api_key", apiKey);
@@ -135,8 +142,7 @@ public class RoblyClient {
 
 	public RoblyResponse contactsRemoveSubList(String memberId, String email,
 			String subListId) {
-		//
-		Client client = ClientBuilder.newClient();
+		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -167,7 +173,7 @@ public class RoblyClient {
 
 	public RoblyResponse contactsAddSubList(String memberId, String email,
 			Integer subListId) {
-		Client client = ClientBuilder.newClient();
+		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -205,7 +211,7 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse contactsUnsubscribe(String memberId, String email) {
-		Client client = ClientBuilder.newClient();
+		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -234,7 +240,7 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse contactsResubscribe(String memberId, String email) {
-		Client client = ClientBuilder.newClient();
+		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -266,8 +272,7 @@ public class RoblyClient {
 
 	public List<SubLists> subListsShow(boolean includeAll) {
 
-		Client client = ClientBuilder.newClient();
-		// client.register(new LoggingFilter());
+		Client client = getClient();
 		WebTarget target = client.target(restURL)
 				.path("/api/v1/sub_lists/show");
 		target = target.queryParam("api_key", apiKey);
@@ -292,7 +297,7 @@ public class RoblyClient {
 
 	public RoblyResponse subListsRenameSubList(Integer subListId,
 			String subListName) {
-		Client client = ClientBuilder.newClient();
+		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -317,7 +322,7 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse subListsAddSubList(String subListName) {
-		Client client = ClientBuilder.newClient();
+		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -344,7 +349,7 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse subListsDelete(Integer subListId) {
-		Client client = ClientBuilder.newClient();
+		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -370,7 +375,7 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse subListsClearSubList(Integer subListId) {
-		Client client = ClientBuilder.newClient();
+		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -394,7 +399,7 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse subListsAutosort() {
-		Client client = ClientBuilder.newClient();
+		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);

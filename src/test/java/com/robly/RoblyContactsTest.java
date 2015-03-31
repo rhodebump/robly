@@ -1,7 +1,7 @@
 package com.robly;
 
 import static org.junit.Assert.assertNotNull;
-
+import org.apache.commons.configuration.PropertiesConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +21,19 @@ public class RoblyContactsTest {
 
 	@Before
 	public void beforeTests() {
+PropertiesConfiguration config  = null;
+		try {
+		 config = new PropertiesConfiguration("robly.properties");
+
+}catch (Exception e) {
+	throw new RuntimeException(e);
+}
 
 		// Sure, here's an API ID:
-		String apiId = "e729e776f162f4d129ef305d387df251";
+		String apiId = config.getString("robly_api_id");
 
 		// and Key:
-		String apiKey = "c2dcdf57af4612f0c3a227";
+		String apiKey = config.getString("robly_api_key");
 
 		roblyClient = new RoblyClient(apiKey, apiId);
 
