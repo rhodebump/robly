@@ -25,6 +25,28 @@ roblyResponse = roblyClient.contactsAddSubList(null, "rhodebump@gmail.com", subL
 
 ```
 
+If you are running the maven test suite locally, you will need to have the api credentials in your settings.xml file (.m2/settings.xml)
+
+
+```
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <profiles>
+    <profile>
+        <id>pcr</id>
+        <properties>
+        <robly.api.key>your api key here</robly.api.key>
+        <robly.api.id>your api id here</robly.api.id>
+        </properties>
+    </profile>
+  </profiles>
+</settings>
+
+```
+
 All code: https://github.com/rhodebump/robly 
 Jenkins:  http://jenkins.forgebiz.com/jenkins    
 Downloads:  http://jenkins.forgebiz.com/robly/  
