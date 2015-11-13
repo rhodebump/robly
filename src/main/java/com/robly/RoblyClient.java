@@ -9,11 +9,14 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
+
 import com.robly.common.RoblyResponse;
 import com.robly.contacts.Contact;
+import com.robly.signup.SignUpGenerateRequest;
 import com.robly.sublists.*;
+
 import org.apache.commons.lang3.StringUtils;
-import org.glassfish.jersey.filter.LoggingFilter;
+
 import javax.ws.rs.client.Entity;
 
 public class RoblyClient {
@@ -22,21 +25,24 @@ public class RoblyClient {
 
 	private String apiKey = null;
 	private String apiId = null;
+	private Client client = null;
+	
 
 	public RoblyClient(String apiKey, String apiId) {
 		this.apiKey = apiKey;
 		this.apiId = apiId;
+		this.client =  client = ClientBuilder.newClient();
 	}
-    
-    
-    
-    private Client getClient() {
-    
-    		Client client = ClientBuilder.newClient();
+	
+	public RoblyClient(String apiKey, String apiId,Client client) {
+		this.apiKey = apiKey;
+		this.apiId = apiId;
+		this.client = client;
+	}
+	
+	
 
-		// client.register(new LoggingFilter());
-        return client;
-    }
+
 
 	/*
 	 * View Contacts
@@ -57,7 +63,6 @@ public class RoblyClient {
 
 	public List<Contact> contactsShow(boolean subscribed, boolean deleted,
 			boolean includeSubLists, int limit, int offset) {
-		Client client = getClient();
 
 		WebTarget target = client.target(restURL).path("/api/v1/contacts/show");
 		target = target.queryParam("api_key", apiKey);
@@ -111,7 +116,7 @@ public class RoblyClient {
 	public Contact contactsSearch(String memberId, String email,
 			boolean includeFields, boolean includeSubLists) {
 
-		Client client = getClient();
+		
 		WebTarget target = client.target(restURL).path(
 				"/api/v1/contacts/search");
 		target = target.queryParam("api_key", apiKey);
@@ -142,7 +147,6 @@ public class RoblyClient {
 
 	public RoblyResponse contactsRemoveSubList(String memberId, String email,
 			String subListId) {
-		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -173,7 +177,6 @@ public class RoblyClient {
 
 	public RoblyResponse contactsAddSubList(String memberId, String email,
 			Integer subListId) {
-		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -211,7 +214,6 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse contactsUnsubscribe(String memberId, String email) {
-		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -240,7 +242,6 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse contactsResubscribe(String memberId, String email) {
-		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -272,7 +273,6 @@ public class RoblyClient {
 
 	public List<SubLists> subListsShow(boolean includeAll) {
 
-		Client client = getClient();
 		WebTarget target = client.target(restURL)
 				.path("/api/v1/sub_lists/show");
 		target = target.queryParam("api_key", apiKey);
@@ -297,7 +297,6 @@ public class RoblyClient {
 
 	public RoblyResponse subListsRenameSubList(Integer subListId,
 			String subListName) {
-		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -322,7 +321,6 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse subListsAddSubList(String subListName) {
-		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -349,7 +347,6 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse subListsDelete(Integer subListId) {
-		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -375,7 +372,6 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse subListsClearSubList(Integer subListId) {
-		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -399,7 +395,6 @@ public class RoblyClient {
 	 */
 
 	public RoblyResponse subListsAutosort() {
-		Client client = getClient();
 		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
 		map.add("api_key", apiKey);
 		map.add("api_id", apiId);
@@ -411,5 +406,33 @@ public class RoblyClient {
 		return roblyResponse;
 
 	}
+	
+	public RoblyResponse signUpGenerate(SignUpGenerateRequest signUpGenerateRequest) {
+		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>();
+		map.add("api_key", apiKey);
+		map.add("api_id", apiId);
+		map.add("fname", signUpGenerateRequest.getFname());
+		map.add("lname", signUpGenerateRequest.getLname());
+		map.add("email", signUpGenerateRequest.getEmail());
+		map.add("double_opt_in", new Boolean(signUpGenerateRequest.isDoubleOptIn()).toString());
+		map.add("welcome_email", new Boolean(signUpGenerateRequest.isWelcomeEmail()).toString());
+		map.add("include_autoresponder", new Boolean(signUpGenerateRequest.isIncludeAutoresponder()).toString());
+
+						
+		WebTarget target = client.target(restURL).path(
+				"/api/v1/sign_up/generate");
+		RoblyResponse roblyResponse = target
+				.request(MediaType.APPLICATION_JSON).post(Entity.form(map),
+						RoblyResponse.class);
+		return roblyResponse;
+
+	}
+	
+	
+	
+	
+			
+			
+			
 
 }
