@@ -100,36 +100,67 @@ public class Member {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-//
-//	@JsonProperty("sub_list_members")
-//	private List<SubListMember> subListMembers = null;
-//
-//	public void setSubListMembers(SubListMembers subListMembers) {
-//		this.subListMembers = subListMembers;
-//	}
-//
-//	public SubListMembers getSubListMembers() {
-//		return subListMembers;
-//	}
-	
-//	  @JsonProperty("sub_list_members") 
-//	  private SubListMembers subListMembers = null;
-//	
-//	  public void setSubListMembers(SubListMembers subListMembers) {
-//	  this.subListMembers = subListMembers; }
-//	 
-//	  
-//	  public SubListMembers getSubListMembers() { return subListMembers; }
-	
-	@JsonProperty("sub_list_members")
-	
-	  private List<SubListMembers> subListMembers = null;
-	  
-	  public void setSubListMembers(List<SubListMembers> subListMembers) {
-	  this.subListMembers = subListMembers; }
-	  
-	  
-	  public List<SubListMembers> getSubListMembers() { return subListMembers; }
-	 
 
+	//
+	// @JsonProperty("sub_list_members")
+	// private List<SubListMember> subListMembers = null;
+	//
+	// public void setSubListMembers(SubListMembers subListMembers) {
+	// this.subListMembers = subListMembers;
+	// }
+	//
+	// public SubListMembers getSubListMembers() {
+	// return subListMembers;
+	// }
+
+	// @JsonProperty("sub_list_members")
+	// private SubListMembers subListMembers = null;
+	//
+	// public void setSubListMembers(SubListMembers subListMembers) {
+	// this.subListMembers = subListMembers; }
+	//
+	//
+	// public SubListMembers getSubListMembers() { return subListMembers; }
+
+	@JsonProperty("sub_list_members")
+	private List<SubListMembers> subListMembers = null;
+
+	public void setSubListMembers(List<SubListMembers> subListMembers) {
+		this.subListMembers = subListMembers;
+	}
+
+	public List<SubListMembers> getSubListMembers() {
+		return subListMembers;
+	}
+
+	@JsonProperty("is_cleaned")
+	boolean cleaned = false;
+
+	public boolean isCleaned() {
+		return cleaned;
+	}
+
+	public void setCleaned(boolean cleaned) {
+		this.cleaned = cleaned;
+	}
+	
+	@JsonProperty("is_unsubscribed")
+	boolean unsubscribed = false;
+
+	public boolean isUnsubscribed() {
+		return cleaned;
+	}
+
+	public void setUnsubscribed(boolean unsubscribed) {
+		this.unsubscribed = unsubscribed;
+	}
+	
+	
+	
+
+	
+	
+	
+	
+	
 }

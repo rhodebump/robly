@@ -1,6 +1,8 @@
 package com.robly.common;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /*
 {"successful":true,"message":"Member is unsubscribed."}
 */
@@ -27,5 +29,18 @@ public class RoblyResponse {
 
 	private String message = null;
     
+	
+	@JsonProperty("contact_id")
+	private String contact_id = null;
+	
+	
+	public String getContactId() {
+		return contact_id;
+	}
+	
+	public void setContactId(String contact_id) {
+		this.contact_id = contact_id;
+	}
+	
     
 }
