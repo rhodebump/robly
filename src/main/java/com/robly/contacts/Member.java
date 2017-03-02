@@ -101,35 +101,16 @@ public class Member {
 		this.updatedAt = updatedAt;
 	}
 
-	//
-	// @JsonProperty("sub_list_members")
-	// private List<SubListMember> subListMembers = null;
-	//
-	// public void setSubListMembers(SubListMembers subListMembers) {
-	// this.subListMembers = subListMembers;
-	// }
-	//
-	// public SubListMembers getSubListMembers() {
-	// return subListMembers;
-	// }
 
-	// @JsonProperty("sub_list_members")
-	// private SubListMembers subListMembers = null;
-	//
-	// public void setSubListMembers(SubListMembers subListMembers) {
-	// this.subListMembers = subListMembers; }
-	//
-	//
-	// public SubListMembers getSubListMembers() { return subListMembers; }
 
 	@JsonProperty("sub_list_members")
-	private List<SubListMembers> subListMembers = null;
+	private ArrayList<SubListMembers> subListMembers = null;
 
-	public void setSubListMembers(List<SubListMembers> subListMembers) {
+	public void setSubListMembers(ArrayList<SubListMembers> subListMembers) {
 		this.subListMembers = subListMembers;
 	}
 
-	public List<SubListMembers> getSubListMembers() {
+	public ArrayList<SubListMembers> getSubListMembers() {
 		return subListMembers;
 	}
 

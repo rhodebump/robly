@@ -1,7 +1,7 @@
 package com.robly;
 
 import java.util.List;
-
+import java.util.ArrayList;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -278,11 +278,12 @@ public class RoblyClient {
 		target = target.queryParam("api_key", apiKey);
 		target = target.queryParam("api_id", apiId);
 		target = target.queryParam("include_all", includeAll);
-		GenericType<List<SubLists>> listm = new GenericType<List<SubLists>>() {
+		GenericType<ArrayList<SubLists>> listm = new GenericType<ArrayList<SubLists>>() {
 		};
-		List<SubLists> response = target.request(MediaType.APPLICATION_JSON)
-				.get(listm);
-		return response;
+		ArrayList<SubLists> response = target.request(MediaType.APPLICATION_JSON).get(listm);
+		 List<SubLists> list = new ArrayList<SubLists>();
+		 list.addAll(response);
+		return list;
 
 	}
 

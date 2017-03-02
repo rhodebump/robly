@@ -70,12 +70,17 @@ PropertiesConfiguration config  = null;
 		List<SubLists> subLists = new ArrayList<SubLists>();
 		try {
 
+			System.out.println("Test 1");
 			subLists = roblyClient.subListsShow(true);
+			System.out.println("Test 2");
 			assertNotNull(subLists);
+			System.out.println("Test 2a");
 
 		} catch (Exception e) {
 			// System.out.print(e.getErrorInfo());
+			System.out.println("Test 3");
 			e.printStackTrace();
+			assertNotNull(null);
 		}
 	}
 
